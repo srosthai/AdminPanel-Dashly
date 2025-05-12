@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Webinning" name="author">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap">
+    <link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');"
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap">
+    <!-- no-JS fallback -->
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap">
+    </noscript>
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="./assets/css/theme.bundle.css">
+    <script>
+        // Theme switcher
+
+        let themeSwitcher = document.getElementById('themeSwitcher');
+
+        const getPreferredTheme = () => {
+            if (localStorage.getItem('theme') != null) {
+                return localStorage.getItem('theme');
+            }
+
+            return document.documentElement.dataset.theme;
+        }
+            ;
+
+        const setTheme = function (theme) {
+            if (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.dataset.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            } else {
+                document.documentElement.dataset.theme = theme;
+            }
+
+            localStorage.setItem('theme', theme);
+        };
+
+        const showActiveTheme = theme => {
+            const activeBtn = document.querySelector(`[data-theme-value="${theme}"]`);
+
+            document.querySelectorAll('[data-theme-value]').forEach(element => {
+                element.classList.remove('active');
+            }
+            );
+
+            activeBtn && activeBtn.classList.add('active');
+
+            // Set button if demo mode is enabled
+            document.querySelectorAll('[data-theme-control="theme"]').forEach(element => {
+                if (element.value == theme) {
+                    element.checked = true;
+                }
+            }
+            );
+        }
+            ;
+
+        function reloadPage() {
+            window.location = window.location.pathname;
+        }
+
+        setTheme(getPreferredTheme());
+
+        if (typeof themeSwitcher != 'undefined') {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (localStorage.getItem('theme') != null) {
+                    if (localStorage.getItem('theme') == 'auto') {
+                        reloadPage();
+                    }
+                }
+            }
+            );
+
+            window.addEventListener('load', () => {
+                showActiveTheme(getPreferredTheme());
+
+                document.querySelectorAll('[data-theme-value]').forEach(element => {
+                    element.addEventListener('click', () => {
+                        const theme = element.getAttribute('data-theme-value');
+
+                        localStorage.setItem('theme', theme);
+                        reloadPage();
+                    }
+                    )
+                }
+                )
+            }
+            );
+        }
+    </script>
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/favicon/favicon.ico" sizes="any">
+    <!-- Page Title -->
+    <title>Landing | Dashly</title>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="navbar navbar-expand-lg px-0">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                <img src="./assets/images/logo.svg" class="navbar-brand-img logo-light logo-large" alt="..." width="125"
+                    height="25">
+                <img src="./assets/images/logo-dark.svg" class="navbar-brand-img logo-dark logo-large" alt="..."
+                    width="125" height="25">
+            </a>
+            <a href="javascript: void(0);" class="navbar-toggler" data-bs-toggle="collapse"
+                data-bs-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </a>
+            <div class="collapse navbar-collapse" id="menuCollapse">
+                <ul class="navbar-nav mx-auto py-5 py-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://themes.getbootstrap.com/product/dashly-admin-dashboard-template/"
+                            target="_blank">Buy now</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <div class="dropdown" id="themeSwitcher">
+                        <a href="javascript: void(0);"
+                            class="dropdown-toggle no-arrow d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm mx-1 mx-lg-2 w-40px h-40px link-secondary"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18" width="18">
+                                <g>
+                                    <path
+                                        d="M12,4.64A7.36,7.36,0,1,0,19.36,12,7.37,7.37,0,0,0,12,4.64Zm0,12.72A5.36,5.36,0,1,1,17.36,12,5.37,5.37,0,0,1,12,17.36Z"
+                                        style="fill: currentColor" />
+                                    <path d="M12,3.47a1,1,0,0,0,1-1V1a1,1,0,0,0-2,0V2.47A1,1,0,0,0,12,3.47Z"
+                                        style="fill: currentColor" />
+                                    <path
+                                        d="M4.55,6a1,1,0,0,0,.71.29A1,1,0,0,0,6,6,1,1,0,0,0,6,4.55l-1-1A1,1,0,0,0,3.51,4.93Z"
+                                        style="fill: currentColor" />
+                                    <path d="M2.47,11H1a1,1,0,0,0,0,2H2.47a1,1,0,1,0,0-2Z" style="fill: currentColor" />
+                                    <path
+                                        d="M4.55,18l-1,1a1,1,0,0,0,0,1.42,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l1-1A1,1,0,0,0,4.55,18Z"
+                                        style="fill: currentColor" />
+                                    <path d="M12,20.53a1,1,0,0,0-1,1V23a1,1,0,0,0,2,0V21.53A1,1,0,0,0,12,20.53Z"
+                                        style="fill: currentColor" />
+                                    <path
+                                        d="M19.45,18A1,1,0,0,0,18,19.45l1,1a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42Z"
+                                        style="fill: currentColor" />
+                                    <path d="M23,11H21.53a1,1,0,0,0,0,2H23a1,1,0,0,0,0-2Z" style="fill: currentColor" />
+                                    <path
+                                        d="M18.74,6.26A1,1,0,0,0,19.45,6l1-1a1,1,0,1,0-1.42-1.42l-1,1A1,1,0,0,0,18,6,1,1,0,0,0,18.74,6.26Z"
+                                        style="fill: currentColor" />
+                                </g>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <button type="button" class="dropdown-item active" data-theme-value="light">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="18"
+                                        width="18">
+                                        <g>
+                                            <path
+                                                d="M12,4.64A7.36,7.36,0,1,0,19.36,12,7.37,7.37,0,0,0,12,4.64Zm0,12.72A5.36,5.36,0,1,1,17.36,12,5.37,5.37,0,0,1,12,17.36Z"
+                                                style="fill: currentColor" />
+                                            <path d="M12,3.47a1,1,0,0,0,1-1V1a1,1,0,0,0-2,0V2.47A1,1,0,0,0,12,3.47Z"
+                                                style="fill: currentColor" />
+                                            <path
+                                                d="M4.55,6a1,1,0,0,0,.71.29A1,1,0,0,0,6,6,1,1,0,0,0,6,4.55l-1-1A1,1,0,0,0,3.51,4.93Z"
+                                                style="fill: currentColor" />
+                                            <path d="M2.47,11H1a1,1,0,0,0,0,2H2.47a1,1,0,1,0,0-2Z"
+                                                style="fill: currentColor" />
+                                            <path
+                                                d="M4.55,18l-1,1a1,1,0,0,0,0,1.42,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l1-1A1,1,0,0,0,4.55,18Z"
+                                                style="fill: currentColor" />
+                                            <path d="M12,20.53a1,1,0,0,0-1,1V23a1,1,0,0,0,2,0V21.53A1,1,0,0,0,12,20.53Z"
+                                                style="fill: currentColor" />
+                                            <path
+                                                d="M19.45,18A1,1,0,0,0,18,19.45l1,1a1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.42Z"
+                                                style="fill: currentColor" />
+                                            <path d="M23,11H21.53a1,1,0,0,0,0,2H23a1,1,0,0,0,0-2Z"
+                                                style="fill: currentColor" />
+                                            <path
+                                                d="M18.74,6.26A1,1,0,0,0,19.45,6l1-1a1,1,0,1,0-1.42-1.42l-1,1A1,1,0,0,0,18,6,1,1,0,0,0,18.74,6.26Z"
+                                                style="fill: currentColor" />
+                                        </g>
+                                    </svg>
+                                    Light mode
+
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item" data-theme-value="dark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="18"
+                                        width="18">
+                                        <path
+                                            d="M19.57,23.34a1,1,0,0,0,0-1.9,9.94,9.94,0,0,1,0-18.88,1,1,0,0,0,.68-.94,1,1,0,0,0-.68-.95A11.58,11.58,0,0,0,8.88,2.18,12.33,12.33,0,0,0,3.75,12a12.31,12.31,0,0,0,5.11,9.79A11.49,11.49,0,0,0,15.61,24,12.55,12.55,0,0,0,19.57,23.34ZM10,20.17A10.29,10.29,0,0,1,5.75,12a10.32,10.32,0,0,1,4.3-8.19A9.34,9.34,0,0,1,15.59,2a.17.17,0,0,1,.17.13.18.18,0,0,1-.07.2,11.94,11.94,0,0,0-.18,19.21.25.25,0,0,1-.16.45A9.5,9.5,0,0,1,10,20.17Z"
+                                            style="fill: currentColor" />
+                                    </svg>
+                                    Dark mode
+
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button" class="dropdown-item" data-theme-value="auto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="me-2" height="18"
+                                        width="18">
+                                        <path
+                                            d="M24,12a1,1,0,0,0-1-1H19.09a.51.51,0,0,1-.49-.4,6.83,6.83,0,0,0-.94-2.28.5.5,0,0,1,.06-.63l2.77-2.76a1,1,0,1,0-1.42-1.42L16.31,6.28a.5.5,0,0,1-.63.06A6.83,6.83,0,0,0,13.4,5.4a.5.5,0,0,1-.4-.49V1a1,1,0,0,0-2,0V4.91a.51.51,0,0,1-.4.49,6.83,6.83,0,0,0-2.28.94.5.5,0,0,1-.63-.06L4.93,3.51A1,1,0,0,0,3.51,4.93L6.28,7.69a.5.5,0,0,1,.06.63A6.83,6.83,0,0,0,5.4,10.6a.5.5,0,0,1-.49.4H1a1,1,0,0,0,0,2H4.91a.51.51,0,0,1,.49.4,6.83,6.83,0,0,0,.94,2.28.5.5,0,0,1-.06.63L3.51,19.07a1,1,0,1,0,1.42,1.42l2.76-2.77a.5.5,0,0,1,.63-.06,6.83,6.83,0,0,0,2.28.94.5.5,0,0,1,.4.49V23a1,1,0,0,0,2,0V19.09a.51.51,0,0,1,.4-.49,6.83,6.83,0,0,0,2.28-.94.5.5,0,0,1,.63.06l2.76,2.77a1,1,0,1,0,1.42-1.42l-2.77-2.76a.5.5,0,0,1-.06-.63,6.83,6.83,0,0,0,.94-2.28.5.5,0,0,1,.49-.4H23A1,1,0,0,0,24,12Zm-8.74,2.5A5.76,5.76,0,0,1,9.5,8.74a5.66,5.66,0,0,1,.16-1.31A.49.49,0,0,1,10,7.07a5.36,5.36,0,0,1,1.8-.31,5.47,5.47,0,0,1,5.46,5.46,5.36,5.36,0,0,1-.31,1.8.49.49,0,0,1-.35.32A5.53,5.53,0,0,1,15.26,14.5Z"
+                                            style="fill: currentColor" />
+                                    </svg>
+                                    Auto
+
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Divider -->
+                    <div class="vr bg-gray-700 mx-1 mx-md-2 mx-lg-3"></div>
+                    <!-- Link -->
+                    <a href="../index.html" class="btn btn-dark mx-1 mx-lg-2 px-4 px-lg-5">Preview Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- MAIN CONTENT -->
+    <main>
+        <section class="position-relative py-8"
+            style="background: linear-gradient(0deg, rgba(0,186,199,0.05) 0%, rgba(255,255,255,0) 100%)">
+            <div class="container">
+                <div class="row align-items-center vh-75">
+                    <div class="col-lg-6 col-xxl-5 d-flex flex-column h-100">
+                        <div class="my-auto">
+                            <h1 class="display-1 mb-5 lh-sm">Admin & Dashboard Template</h1>
+                            <p class="fs-3 mb-8">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
+                                Cras eget metus ornare sem tincidunt bibendum <br>vivamus vitae pharetra tortor
+                            </p>
+                            <div class="input-group input-group-lg mw-400px mb-5">
+                                <input type="text" class="form-control bg-light-green" placeholder="Enter your email"
+                                    aria-label="Email address" aria-describedby="email-addon">
+                                <button class="btn btn-primary" type="button" id="email-addon">Try for Free</button>
+                            </div>
+                        </div>
+                        <div class="mt-auto mb-5">
+                            <p class="text-secondary mb-1">Join thousands of businesses who trust in us</p>
+                            <div class="d-flex align-items-center">
+                                <span class="avatar avatar-lg d-flex align-items-center me-6">
+                                    <img src="./assets/images/logos/logo-amazon.svg"
+                                        class="img-fluid ft-grayscale-100 opacity-50" alt="...">
+                                </span>
+                                <span class="avatar avatar-lg d-flex align-items-center me-6">
+                                    <img src="./assets/images/logos/logo-salesforce-full.svg"
+                                        class="img-fluid ft-grayscale-100 opacity-50" alt="...">
+                                </span>
+                                <span class="avatar avatar-lg d-flex align-items-center me-6">
+                                    <img src="./assets/images/logos/logo-shopify-full.svg"
+                                        class="img-fluid ft-grayscale-100 opacity-50" alt="...">
+                                </span>
+                                <span class="avatar avatar-lg d-flex align-items-center">
+                                    <img src="./assets/images/logos/logo-samsung.svg"
+                                        class="img-fluid ft-grayscale-100 opacity-50" alt="...">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 position-absolute top-50 end-0 translate-middle-y pe-0 d-none d-lg-block">
+                        <div class="bg-size-cover bg-repeat-no-repeat vh-75 shadow-lg rounded-5 rounded-end-0"
+                            style="background-image: url(./assets/images/printscreens/dashboard.jpg);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-10">
+            <div class="container">
+                <div class="row justify-content-between mb-8 align-items-center">
+                    <div class="col-lg-5 col-xl-6">
+                        <h3 class="text-uppercase text-primary h4 mb-3">Our services</h3>
+                        <h2 class="display-3 lh-sm mb-5 mb-xl-0">What we offer</h2>
+                    </div>
+                    <div class="col-lg-7 col-xl-6">
+                        <p class="lh-lg mb-0 fw-semibold">Proin interdum justo erat, eu aliquam dui eleifend et.
+                            Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam nunc sem, maximus id
+                            felis non, condimentum cursus tortor.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xl-3 mb-7 mb-xl-0">
+                        <img src="./assets/images/backgrounds/background-02.jpeg"
+                            class="img-fluid rounded-4 shadow mb-6" alt="...">
+                        <h4 class="h2 mb-2">Access and Buy Standards</h4>
+                        <p class="text-secondary mb-0">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                            posuere cubilia curae; Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+                            per inceptos himenaeos.</p>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-7 mb-xl-0">
+                        <img src="./assets/images/backgrounds/background-03.jpeg"
+                            class="img-fluid rounded-4 shadow mb-6" alt="...">
+                        <h4 class="h2 mb-2">Online Subscription</h4>
+                        <p class="text-secondary mb-0">Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                            Cras ex quam, luctus laoreet nisl sit amet, ultrices ultrices libero. Praesent imperdiet,
+                            erat vitae vulputate suscipit.</p>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mb-7 mb-md-0">
+                        <img src="./assets/images/backgrounds/background-04.jpeg"
+                            class="img-fluid rounded-4 shadow mb-6" alt="...">
+                        <h4 class="h2 mb-2">Network Discovery</h4>
+                        <p class="text-secondary mb-0">Nullam volutpat commodo cursus. Morbi et euismod eros.
+                            Suspendisse ligula dolor, volutpat eget feugiat et, euismod non velit. Duis nec pharetra
+                            felis. Cras ultrices, nisl vitae.</p>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <img src="./assets/images/backgrounds/background-05.jpeg"
+                            class="img-fluid rounded-4 shadow mb-6" alt="...">
+                        <h4 class="h2 mb-2">Remote Support</h4>
+                        <p class="text-secondary mb-0">Vivamus consectetur ullamcorper convallis. Cras facilisis
+                            ullamcorper dolor id lacinia. Curabitur fermentum bibendum augue, vitae ultricies risus
+                            convallis nec.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-10 bg-light-green">
+            <div class="container">
+                <h3 class="text-uppercase text-primary h4 mb-3">Our features</h3>
+                <h2 class="display-3 lh-sm mb-8">Explore the key features</h2>
+                <div class="row gx-xl-9">
+                    <div class="col-lg-4 mb-7 mb-lg-0">
+                        <ul class="nav nav-pills flex-column" id="features-tab" role="tablist">
+                            <li class="nav-item bg-white rounded shadow mb-4" role="presentation">
+                                <a class="nav-link active" href="javascript: void(0);" id="featureTabOne"
+                                    data-bs-toggle="pill" data-bs-target="#featureOne" role="tab"
+                                    aria-controls="featureOne" aria-selected="true">
+                                    <span class="d-flex mb-3 align-items-center">
+                                        <span
+                                            class="w-30px h-30px rounded-1 bg-gray-300 bg-opacity-50 me-3 d-flex align-items-center justify-content-center">
+                                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24">
+                                                <g>
+                                                    <path
+                                                        d="M1.25,20.75h3.5A.25.25,0,0,0,5,20.5V18.25a.5.5,0,0,0-.5-.5h-3a.5.5,0,0,0-.5.5V20.5A.25.25,0,0,0,1.25,20.75Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M7.5,12.75a.5.5,0,0,0-.5.5V20.5a.25.25,0,0,0,.25.25h3.5A.25.25,0,0,0,11,20.5V13.25a.5.5,0,0,0-.5-.5Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M13.5,14.75a.5.5,0,0,0-.5.5V20.5a.25.25,0,0,0,.25.25h3.5A.25.25,0,0,0,17,20.5V15.25a.5.5,0,0,0-.5-.5Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M19.5,7.75a.5.5,0,0,0-.5.5V20.5a.25.25,0,0,0,.25.25h3.5A.25.25,0,0,0,23,20.5V8.25a.5.5,0,0,0-.5-.5Z"
+                                                        style="fill: currentColor" />
+                                                    <path d="M1,23.75H23a1,1,0,0,0,0-2H1a1,1,0,0,0,0,2Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M20.11,4.17a.25.25,0,0,1,.18.08l.86.85a.47.47,0,0,0,.35.15.43.43,0,0,0,.19,0A.5.5,0,0,0,22,4.75v-4a.5.5,0,0,0-.5-.5h-4A.5.5,0,0,0,17,.56a.47.47,0,0,0,.11.54l1,1a.25.25,0,0,1,0,.35L15,6a.77.77,0,0,1-.79.2L10.45,4.92a3.24,3.24,0,0,0-3.11.58L2.2,9.79A1.25,1.25,0,0,0,2,11.55,1.24,1.24,0,0,0,3,12a1.22,1.22,0,0,0,.8-.29L9,7.42a.75.75,0,0,1,.71-.13l3.72,1.24a3.24,3.24,0,0,0,3.41-.88l3.14-3.4A.37.37,0,0,1,20.11,4.17Z"
+                                                        style="fill: currentColor" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="h4 mb-0">Sales Report</span>
+                                    </span>
+                                    <span>Pellentesque commodo neque vitae ligula congue faucibus. Suspendisse elit
+                                        tellus, vestibulum et risus in, congue sollicitudin ligula.</span>
+                                </a>
+                            </li>
+                            <li class="nav-item bg-white rounded shadow mb-4" role="presentation">
+                                <a class="nav-link" href="javascript: void(0);" id="featureTabTwo" data-bs-toggle="pill"
+                                    data-bs-target="#featureTwo" role="tab" aria-controls="featureTwo"
+                                    aria-selected="false">
+                                    <span class="d-flex mb-3 align-items-center">
+                                        <span
+                                            class="w-30px h-30px rounded-1 bg-gray-300 bg-opacity-50 me-3 d-flex align-items-center justify-content-center">
+                                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24">
+                                                <g>
+                                                    <circle cx="19.49" cy="17.15" r="2.32" style="fill: currentColor" />
+                                                    <circle cx="4.52" cy="17.15" r="2.32" style="fill: currentColor" />
+                                                    <path
+                                                        d="M18.16,24H24a4.94,4.94,0,0,0-5.66-2.4,5.3,5.3,0,0,0-1.16.54A8.59,8.59,0,0,1,18.16,24Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M6.76,22.11a4.76,4.76,0,0,0-1.1-.51A4.94,4.94,0,0,0,0,24H5.74A9.51,9.51,0,0,1,6.76,22.11Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M17.07,24A5.74,5.74,0,0,0,12,20.31,5.76,5.76,0,0,0,6.83,24Z"
+                                                        style="fill: currentColor" />
+                                                    <g>
+                                                        <circle cx="11.95" cy="7.42" r="1.6"
+                                                            style="fill: currentColor" />
+                                                        <path
+                                                            d="M17,7.75a.5.5,0,0,1,0-.67L18.09,6a1.87,1.87,0,0,0,.25-2.25,1.86,1.86,0,0,0-2.06-.89l-1.5.35a.5.5,0,0,1-.57-.34l-.45-1.48a1.89,1.89,0,0,0-3.62,0L9.69,2.82a.48.48,0,0,1-.56.34L7.62,2.81a1.85,1.85,0,0,0-2.06.89A1.89,1.89,0,0,0,5.81,6L6.87,7.08a.5.5,0,0,1,0,.67L5.81,8.88a1.89,1.89,0,0,0-.25,2.25A1.84,1.84,0,0,0,7.62,12l1.51-.34a.47.47,0,0,1,.56.33l.27.86a3.89,3.89,0,0,1,4,.05l.28-.91a.49.49,0,0,1,.57-.33l1.5.34a1.83,1.83,0,0,0,2.06-.89,1.87,1.87,0,0,0-.25-2.25ZM12,10.61a3.2,3.2,0,1,1,3.2-3.19A3.19,3.19,0,0,1,12,10.61Z"
+                                                            style="fill: currentColor" />
+                                                    </g>
+                                                    <circle cx="11.9" cy="16.25" r="2.91" style="fill: currentColor" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="h4 mb-0">User Management</span>
+                                    </span>
+                                    <span>Fusce porttitor magna sed tortor elementum dapibus. Duis feugiat aliquam
+                                        lorem, non hendrerit sapien suscipit quis.</span>
+                                </a>
+                            </li>
+                            <li class="nav-item bg-white rounded shadow mb-4" role="presentation">
+                                <a class="nav-link" href="javascript: void(0);" id="featureTabThree"
+                                    data-bs-toggle="pill" data-bs-target="#featureThree" role="tab"
+                                    aria-controls="featureThree" aria-selected="false">
+                                    <span class="d-flex mb-3 align-items-center">
+                                        <span
+                                            class="w-30px h-30px rounded-1 bg-gray-300 bg-opacity-50 me-3 d-flex align-items-center justify-content-center">
+                                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24">
+                                                <g>
+                                                    <path
+                                                        d="M21.5,3H18.75a.25.25,0,0,1-.25-.25V1a1,1,0,0,0-2,0V5.75a.75.75,0,0,1-1.5,0V3.5a.5.5,0,0,0-.5-.5H8.25A.25.25,0,0,1,8,2.75V1A1,1,0,0,0,6,1V5.75a.75.75,0,0,1-1.5,0V3.5A.5.5,0,0,0,4,3H2.5a2,2,0,0,0-2,2V22a2,2,0,0,0,2,2h19a2,2,0,0,0,2-2V5A2,2,0,0,0,21.5,3Zm0,18.5a.5.5,0,0,1-.5.5H3a.5.5,0,0,1-.5-.5V9.5A.5.5,0,0,1,3,9H21a.5.5,0,0,1,.5.5Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M9.65,11.15a1.51,1.51,0,0,0-1.59.18L6.38,12.68a1,1,0,1,0,1.24,1.56l.88-.7V19a1,1,0,0,0,2,0V12.5A1.5,1.5,0,0,0,9.65,11.15Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M16,11H13a1,1,0,0,0,0,2h2.21l-2.62,5.58a1,1,0,0,0,.49,1.33,1,1,0,0,0,1.33-.48l3-6.34A1.51,1.51,0,0,0,16,11Z"
+                                                        style="fill: currentColor" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="h4 mb-0">Schedule Calendar</span>
+                                    </span>
+                                    <span>Sed commodo magna purus, non volutpat mi convallis nec. Nam eget ornare magna.
+                                        Donec ac orci vitae dolor lacinia pellentesque nec a odio.</span>
+                                </a>
+                            </li>
+                            <li class="nav-item bg-white rounded shadow" role="presentation">
+                                <a class="nav-link" href="javascript: void(0);" id="featureTabFour"
+                                    data-bs-toggle="pill" data-bs-target="#featureFour" role="tab"
+                                    aria-controls="featureFour" aria-selected="false">
+                                    <span class="d-flex mb-3 align-items-center">
+                                        <span
+                                            class="w-30px h-30px rounded-1 bg-gray-300 bg-opacity-50 me-3 d-flex align-items-center justify-content-center">
+                                            <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24">
+                                                <g>
+                                                    <path
+                                                        d="M7.29,17.79,6,19.09V17.5a1,1,0,0,0-1-1H2.5A.5.5,0,0,1,2,16V2.5A.5.5,0,0,1,2.5,2H19a.5.5,0,0,1,.5.5V8a1,1,0,0,0,2,0V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V16.5a2,2,0,0,0,2,2H4v3a1,1,0,0,0,1.71.71l3-3a1,1,0,0,0-1.42-1.42Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M22,10.5H12.5a2,2,0,0,0-2,2V19a2,2,0,0,0,2,2h3.17l3.73,2.8a1,1,0,0,0,1.05.09A1,1,0,0,0,21,23V21h1a2,2,0,0,0,2-2V12.5A2,2,0,0,0,22,10.5Zm0,8a.5.5,0,0,1-.5.5H20a1,1,0,0,0-1,1v1l-2.4-1.8A1,1,0,0,0,16,19H13a.5.5,0,0,1-.5-.5V13a.5.5,0,0,1,.5-.5h8.5a.5.5,0,0,1,.5.5Z"
+                                                        style="fill: currentColor" />
+                                                    <path
+                                                        d="M16.25,6.5a.76.76,0,0,0-.75-.75H5a.75.75,0,0,0,0,1.5H15.5A.76.76,0,0,0,16.25,6.5Z"
+                                                        style="fill: currentColor" />
+                                                    <path d="M5,10.75a.75.75,0,0,0,0,1.5H8a.75.75,0,0,0,0-1.5Z"
+                                                        style="fill: currentColor" />
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="h4 mb-0">Meeting and Chatting</span>
+                                    </span>
+                                    <span>Aliquam erat volutpat. Phasellus porta nibh risus, a mattis orci volutpat a.
+                                        In fermentum finibus posuere. Maecenas eget faucibus erat.</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <div class="tab-content h-100" id="features-tabContent">
+                            <div class="tab-pane fade h-100 show active" id="featureOne" role="tabpanel"
+                                aria-labelledby="featureTabOne">
+                                <img src="./assets/images/printscreens/sales-report.jpg"
+                                    class="w-100 h-100 object-fit-contain" alt="...">
+                            </div>
+                            <div class="tab-pane fade h-100" id="featureTwo" role="tabpanel"
+                                aria-labelledby="featureTabTwo">
+                                <img src="./assets/images/printscreens/user-management.jpg"
+                                    class="w-100 h-100 object-fit-contain" alt="...">
+                            </div>
+                            <div class="tab-pane fade h-100" id="featureThree" role="tabpanel"
+                                aria-labelledby="featureTabThree">
+                                <img src="./assets/images/printscreens/calendar.jpg"
+                                    class="w-100 h-100 object-fit-contain" alt="...">
+                            </div>
+                            <div class="tab-pane fade h-100" id="featureFour" role="tabpanel"
+                                aria-labelledby="featureTabFour">
+                                <img src="./assets/images/printscreens/chat.jpg" class="w-100 h-100 object-fit-contain"
+                                    alt="...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-10">
+            <div class="container">
+                <div class="row gx-xl-10 mt-5">
+                    <div class="col-xl-7 mb-7 mb-xl-0">
+                        <div class="row gy-6">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <span
+                                            class="avatar avatar-lg text-bg-gray-300 d-flex align-items-center justify-content-center mb-8">
+                                            <img src="./assets/images/logos/logo-slack.svg" class="img-fluid" width="42"
+                                                alt="...">
+                                        </span>
+                                        <span class="h3 card-title d-block mb-2">Slack</span>
+                                        <span class="small text-body-secondary mb-0">Slack is an instant messaging
+                                            program designed by Slack Technologies and owned by Salesforce.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100 text-bg-primary shadow-lg mt-xl-n5 me-xl-n5">
+                                    <div class="card-body">
+                                        <span
+                                            class="avatar avatar-lg text-bg-gray-300 d-flex align-items-center justify-content-center mb-8">
+                                            <img src="./assets/images/logos/logo-teams.svg" class="img-fluid" width="42"
+                                                alt="...">
+                                        </span>
+                                        <span class="h3 card-title d-block mb-2">Microsoft Teams</span>
+                                        <span class="small mb-0">Microsoft Teams is a proprietary business communication
+                                            platform developed by Microsoft, as part of the Microsoft 365 family of
+                                            products.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <span
+                                            class="avatar avatar-lg text-bg-gray-300 d-flex align-items-center justify-content-center mb-8">
+                                            <img src="./assets/images/logos/logo-facebook.svg" class="img-fluid"
+                                                width="42" alt="...">
+                                        </span>
+                                        <span class="h3 card-title d-block mb-2">Facebook</span>
+                                        <span class="small text-body-secondary mb-0">Facebook is an American
+                                            multinational technology conglomerate based in Menlo Park,
+                                            California.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <span
+                                            class="avatar avatar-lg text-bg-gray-300 d-flex align-items-center justify-content-center mb-8">
+                                            <img src="./assets/images/logos/logo-shopify.svg" class="img-fluid"
+                                                width="42" alt="...">
+                                        </span>
+                                        <span class="h3 card-title d-block mb-2">Shopify</span>
+                                        <span class="small text-body-secondary mb-0">Shopify is a Canadian multinational
+                                            e-commerce company headquartered in Ottawa, Ontario.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 d-flex align-items-center">
+                        <div>
+                            <h3 class="text-uppercase text-primary h4 mb-3">Our integrations</h3>
+                            <h2 class="display-3 lh-sm mb-3">Connect Dashly to the tools you already use</h2>
+                            <p class="lh-lg fw-semibold">Sed sit amet mollis lacus. Mauris eget tincidunt nisl, at
+                                efficitur dui. Vivamus maximus neque orci, non bibendum nibh euismod vel. Vestibulum
+                                sollicitudin turpis sed magna ultricies.</p>
+                            <ul class="list-unstyled lh-lg">
+                                <li class="mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20"
+                                        class="text-bg-primary rounded p-1 me-2">
+                                        <path
+                                            d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                            style="fill: currentColor"></path>
+                                    </svg>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
+                                </li>
+                                <li class="mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20"
+                                        class="text-bg-primary rounded p-1 me-2">
+                                        <path
+                                            d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                            style="fill: currentColor"></path>
+                                    </svg>
+                                    Cras ut metus vel ante fermentum lobortis non at nulla
+
+                                </li>
+                                <li class="mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20"
+                                        class="text-bg-primary rounded p-1 me-2">
+                                        <path
+                                            d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                            style="fill: currentColor"></path>
+                                    </svg>
+                                    Donec non odio sit amet lacus sagittis tempor
+
+                                </li>
+                                <li class="mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20"
+                                        class="text-bg-primary rounded p-1 me-2">
+                                        <path
+                                            d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                            style="fill: currentColor"></path>
+                                    </svg>
+                                    Phasellus nec diam sollicitudin, tempor velit sed, eleifend metus
+
+                                </li>
+                                <li>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20" width="20"
+                                        class="text-bg-primary rounded p-1 me-2">
+                                        <path
+                                            d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                            style="fill: currentColor"></path>
+                                    </svg>
+                                    Donec placerat orci id tortor blandit, vitae sagittis ex molestie
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-10 bg-light-green">
+            <div class="container">
+                <div class="text-center">
+                    <h3 class="text-uppercase text-primary h4 mb-3">Our pricing</h3>
+                    <h2 class="display-3 lh-sm">
+                        Find the right plan<br>for your needs
+                    </h2>
+                    <p class="lh-lg mb-8 fw-semibold">
+                        All our plans include a <span class="text-primary">15-day</span>
+                        free trial
+                    </p>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-xl-9">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card mb-0">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-nowrap mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="align-middle">
+                                                            <img src="./assets/images/illustrations/keynote-illustration.svg"
+                                                                class="img-fluid w-75 mt-5" alt="...">
+                                                        </th>
+                                                        <th>
+                                                            <div class="p-5 pt-7 mb-5 text-center text-body">
+                                                                <span
+                                                                    class="h4 text-uppercase mb-3 d-block">Standard</span>
+                                                                <span class="h3 display-3 d-block">$49</span>
+                                                                <span class="h4 small text-body-secondary d-block">
+                                                                    Perfect for starter <br>businesses or single users
+                                                                </span>
+                                                                <!-- Button -->
+                                                                <a class="btn btn-primary w-100"
+                                                                    href="javascript: void(0);">Get started</a>
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div
+                                                                class="p-5 pt-7 mb-5 text-center text-bg-primary rounded">
+                                                                <span class="h4 text-uppercase mb-3 d-block">Pro</span>
+                                                                <span class="h3 display-3 d-block">$149</span>
+                                                                <span class="h4 small opacity-80 d-block">
+                                                                    Enjoy it without <br>any product limitation
+                                                                </span>
+                                                                <!-- Button -->
+                                                                <a class="btn btn-white link-primary w-100"
+                                                                    href="javascript: void(0);">Get started</a>
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="p-5 pt-7 mb-5 text-center text-body">
+                                                                <span
+                                                                    class="h4 text-uppercase mb-3 d-block">Enterprise</span>
+                                                                <span class="h3 display-3 d-block">$599</span>
+                                                                <span class="h4 small text-body-secondary d-block">
+                                                                    Take your business into <br>the next level
+                                                                </span>
+                                                                <!-- Button -->
+                                                                <a class="btn btn-primary w-100"
+                                                                    href="javascript: void(0);">Get started</a>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Build numbers</th>
+                                                        <td class="text-center">50</td>
+                                                        <td class="text-center">100</td>
+                                                        <td class="text-center">Unlimited</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Team members</th>
+                                                        <td class="text-center">20</td>
+                                                        <td class="text-center">100</td>
+                                                        <td class="text-center">Unlimited</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Storage</th>
+                                                        <td class="text-center">100 GB</td>
+                                                        <td class="text-center">500 GB</td>
+                                                        <td class="text-center">5 TB</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Live preview</th>
+                                                        <td class="text-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                height="20" width="20"
+                                                                class="text-bg-primary rounded p-1 me-2 opacity-30">
+                                                                <path
+                                                                    d="M14.3,12.18a.24.24,0,0,1,0-.35l9.26-9.27a1.49,1.49,0,0,0,0-2.12,1.51,1.51,0,0,0-2.12,0L12.18,9.7a.25.25,0,0,1-.36,0L2.56.44A1.51,1.51,0,0,0,.44.44a1.49,1.49,0,0,0,0,2.12L9.7,11.83a.24.24,0,0,1,0,.35L.44,21.44a1.49,1.49,0,0,0,0,2.12,1.51,1.51,0,0,0,2.12,0l9.26-9.26a.25.25,0,0,1,.36,0l9.26,9.26a1.51,1.51,0,0,0,2.12,0,1.49,1.49,0,0,0,0-2.12Z"
+                                                                    style="fill: currentColor"></path>
+                                                            </svg>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                height="20" width="20"
+                                                                class="text-bg-primary rounded p-1 me-2">
+                                                                <path
+                                                                    d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                                                    style="fill: currentColor" />
+                                                            </svg>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                height="20" width="20"
+                                                                class="text-bg-primary rounded p-1 me-2">
+                                                                <path
+                                                                    d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                                                    style="fill: currentColor" />
+                                                            </svg>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Premium support</th>
+                                                        <td class="text-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                height="20" width="20"
+                                                                class="text-bg-primary rounded p-1 me-2 opacity-30">
+                                                                <path
+                                                                    d="M14.3,12.18a.24.24,0,0,1,0-.35l9.26-9.27a1.49,1.49,0,0,0,0-2.12,1.51,1.51,0,0,0-2.12,0L12.18,9.7a.25.25,0,0,1-.36,0L2.56.44A1.51,1.51,0,0,0,.44.44a1.49,1.49,0,0,0,0,2.12L9.7,11.83a.24.24,0,0,1,0,.35L.44,21.44a1.49,1.49,0,0,0,0,2.12,1.51,1.51,0,0,0,2.12,0l9.26-9.26a.25.25,0,0,1,.36,0l9.26,9.26a1.51,1.51,0,0,0,2.12,0,1.49,1.49,0,0,0,0-2.12Z"
+                                                                    style="fill: currentColor"></path>
+                                                            </svg>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                height="20" width="20"
+                                                                class="text-bg-primary rounded p-1 me-2 opacity-30">
+                                                                <path
+                                                                    d="M14.3,12.18a.24.24,0,0,1,0-.35l9.26-9.27a1.49,1.49,0,0,0,0-2.12,1.51,1.51,0,0,0-2.12,0L12.18,9.7a.25.25,0,0,1-.36,0L2.56.44A1.51,1.51,0,0,0,.44.44a1.49,1.49,0,0,0,0,2.12L9.7,11.83a.24.24,0,0,1,0,.35L.44,21.44a1.49,1.49,0,0,0,0,2.12,1.51,1.51,0,0,0,2.12,0l9.26-9.26a.25.25,0,0,1,.36,0l9.26,9.26a1.51,1.51,0,0,0,2.12,0,1.49,1.49,0,0,0,0-2.12Z"
+                                                                    style="fill: currentColor"></path>
+                                                            </svg>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                height="20" width="20"
+                                                                class="text-bg-primary rounded p-1 me-2">
+                                                                <path
+                                                                    d="M23.37.29a1.49,1.49,0,0,0-2.09.34L7.25,20.2,2.56,15.51A1.5,1.5,0,0,0,.44,17.63l5.93,5.94a1.53,1.53,0,0,0,2.28-.19l15.07-21A1.49,1.49,0,0,0,23.37.29Z"
+                                                                    style="fill: currentColor" />
+                                                            </svg>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-10">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-xxl-8">
+                        <div class="text-center">
+                            <h3 class="text-uppercase text-primary h4 mb-3">Our help</h3>
+                            <h2 class="display-3 lh-sm">Frequently Asked Questions</h2>
+                            <p class="lh-lg mb-8 fw-semibold">Nulla dolor nulla, molestie vel luctus ut.</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="d-flex mb-6">
+                                    <div class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20"
+                                            width="20">
+                                            <path
+                                                d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.92,1,1,0,0,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.25a1,1,0,0,1-2,0,4,4,0,1,1,5.6,3.67Z"
+                                                style="fill: currentColor"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="h4 mb-1">Vivamus dapibus libero sed ultricies dapibus?</h3>
+                                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                                            nibh sem, convallis id tincidunt et, tempor vitae turpis.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-6">
+                                    <div class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20"
+                                            width="20">
+                                            <path
+                                                d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.92,1,1,0,0,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.25a1,1,0,0,1-2,0,4,4,0,1,1,5.6,3.67Z"
+                                                style="fill: currentColor"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="h4 mb-1">Nullam gravida orci id venenatis facilisis?</h3>
+                                        <p class="mb-0">Donec non diam nec leo efficitur congue ut ac nisi. Integer ut
+                                            tincidunt ligula, nec cursus augue. Proin sed augue magna.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-6 mb-xl-0">
+                                    <div class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20"
+                                            width="20">
+                                            <path
+                                                d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.92,1,1,0,0,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.25a1,1,0,0,1-2,0,4,4,0,1,1,5.6,3.67Z"
+                                                style="fill: currentColor"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="h4 mb-1">Suspendisse non odio et nisl aliquet consequat?</h3>
+                                        <p class="mb-0">Quisque varius vulputate leo non blandit. Sed iaculis justo nec
+                                            nisl consequat, ut varius dolor efficitur.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="d-flex mb-6">
+                                    <div class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20"
+                                            width="20">
+                                            <path
+                                                d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.92,1,1,0,0,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.25a1,1,0,0,1-2,0,4,4,0,1,1,5.6,3.67Z"
+                                                style="fill: currentColor"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="h4 mb-1">Duis consectetur mauris tristique luctus vehicula?</h3>
+                                        <p class="mb-0">Phasellus pretium urna sed risus scelerisque tristique. Integer
+                                            sodales commodo ullamcorper.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-6">
+                                    <div class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20"
+                                            width="20">
+                                            <path
+                                                d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.92,1,1,0,0,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.25a1,1,0,0,1-2,0,4,4,0,1,1,5.6,3.67Z"
+                                                style="fill: currentColor"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="h4 mb-1">Ut ut urna ut felis vulputate bibendum eu quis leo?</h3>
+                                        <p class="mb-0">Nunc fermentum gravida nisi, vehicula consectetur libero mattis
+                                            eu. Vestibulum pharetra massa in purus ullamcorper.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="text-primary me-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="20"
+                                            width="20">
+                                            <path
+                                                d="M12,0A12,12,0,1,0,24,12,12,12,0,0,0,12,0Zm0,19a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,19Zm1.6-6.08a1,1,0,0,0-.6.92,1,1,0,0,1-2,0,3,3,0,0,1,1.8-2.75A2,2,0,1,0,10,9.25a1,1,0,0,1-2,0,4,4,0,1,1,5.6,3.67Z"
+                                                style="fill: currentColor"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="h4 mb-1">Curabitur sed velit et elit pretium sodales?</h3>
+                                        <p class="mb-0">Curabitur dictum turpis vitae commodo tincidunt. Nam id faucibus
+                                            tortor, donec elementum nunc diam.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / .row -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="text-bg-dark">
+            <div class="container pt-8 pb-4">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="./assets/images/logo-dark.svg" class="img-fluid mb-5" alt="...">
+                        <p class="lh-lg text-secondary">
+                            Clean, clear and flexible layouts <br class="d-none d-lg-block">allow for easy build of web
+                            applications.
+                        </p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <a href="javascript: void(0);"
+                                    class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm w-40px h-40px text-dark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18" width="18">
+                                        <path
+                                            d="M18.14,7.17A.5.5,0,0,0,17.77,7H14V5.59c0-.28.06-.6.51-.6h3a.42.42,0,0,0,.35-.15A.47.47,0,0,0,18,4.5V.5a.5.5,0,0,0-.5-.5H13.17C8.37,0,8,4.1,8,5.35V7H5.5a.5.5,0,0,0-.5.5v4a.5.5,0,0,0,.5.5H8V23.5a.5.5,0,0,0,.5.5h5a.5.5,0,0,0,.5-.5V12h3.35a.5.5,0,0,0,.5-.45l.41-4A.47.47,0,0,0,18.14,7.17Z"
+                                            style="fill: currentColor" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="javascript: void(0);"
+                                    class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm w-40px h-40px text-dark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18" width="18">
+                                        <path
+                                            d="M23.32,6.44a.5.5,0,0,0-.2-.87l-.79-.19A.49.49,0,0,1,22,5.1a.5.5,0,0,1,0-.43l.45-.89a.5.5,0,0,0-.59-.7l-2,.56a.48.48,0,0,1-.43-.09,5,5,0,0,0-8,4v.36a.25.25,0,0,1-.22.25c-2.81.33-5.5-1.1-8.4-4.44a.5.5,0,0,0-.51-.16A.49.49,0,0,0,2,4a7.52,7.52,0,0,0,.46,4.92.27.27,0,0,1,0,.26.24.24,0,0,1-.25.1L1.08,9.06a.52.52,0,0,0-.44.15.51.51,0,0,0-.13.44,5.15,5.15,0,0,0,2.37,3.78.25.25,0,0,1,.12.23.24.24,0,0,1-.15.22l-.54.21a.53.53,0,0,0-.28.29.51.51,0,0,0,0,.4,4.36,4.36,0,0,0,3.2,2.48.27.27,0,0,1,.19.22.26.26,0,0,1-.15.26A11,11,0,0,1,1,18.56a.49.49,0,0,0-.2,1,19.92,19.92,0,0,0,8.14,1.93,12.6,12.6,0,0,0,7-2A12.48,12.48,0,0,0,21.5,9.06V8.19a.49.49,0,0,1,.18-.38Z"
+                                            style="fill: currentColor" />
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="javascript: void(0);"
+                                    class="d-flex align-items-center justify-content-center bg-white rounded-circle shadow-sm w-40px h-40px text-dark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="18" width="18">
+                                        <g>
+                                            <path
+                                                d="M6.1,7.4a.5.5,0,0,0,.69-.06A7,7,0,0,1,12,5a6.9,6.9,0,0,1,5.1,2.21.5.5,0,0,0,.71,0l2.92-2.74a.49.49,0,0,0,0-.7,12,12,0,0,0-17.84.4.49.49,0,0,0-.12.37A.51.51,0,0,0,3,4.9Z"
+                                                style="fill: currentColor" />
+                                            <path
+                                                d="M5.24,14.79a.52.52,0,0,0,.14-.54A6.94,6.94,0,0,1,5,12a7.06,7.06,0,0,1,.36-2.21.48.48,0,0,0-.16-.55L2,6.64a.51.51,0,0,0-.43-.1.49.49,0,0,0-.34.27A12,12,0,0,0,0,12a11.81,11.81,0,0,0,1.33,5.46.5.5,0,0,0,.36.27.54.54,0,0,0,.42-.12Z"
+                                                style="fill: currentColor" />
+                                            <path
+                                                d="M24,10.5a.51.51,0,0,0-.5-.5h-10a.5.5,0,0,0-.5.5v4a.5.5,0,0,0,.5.5h4.84a6.42,6.42,0,0,1-1.14,1.67.5.5,0,0,0,0,.67l2.67,3a.5.5,0,0,0,.37.17.51.51,0,0,0,.37-.15A12,12,0,0,0,24,12.6Z"
+                                                style="fill: currentColor" />
+                                            <path
+                                                d="M15.52,18.46a.52.52,0,0,0-.59-.12,6.93,6.93,0,0,1-8.1-1.63.49.49,0,0,0-.7,0l-3,2.67a.5.5,0,0,0,0,.71,12,12,0,0,0,15,2.25.5.5,0,0,0,.12-.76Z"
+                                                style="fill: currentColor" />
+                                        </g>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-3 mb-lg-0">
+                        <h4>Company</h4>
+                        <ul class="list-unstyled">
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">About</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Pricing</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Jobs</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-3 mb-lg-0">
+                        <h4>Product</h4>
+                        <ul class="list-unstyled">
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Sales software</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Features</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Privacy & Security</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Marketpalce</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Status</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">API</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-3 mb-lg-0">
+                        <h4>Discover</h4>
+                        <ul class="list-unstyled">
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Partner Program</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Get our newsletter</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">What is CRM?</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">CRM Comparison</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Resources</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 col-lg-2 mb-3 mb-lg-0">
+                        <h4>Help Center</h4>
+                        <ul class="list-unstyled">
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Community</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Knowledge base</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Academy</a>
+                            </li>
+                            <li class="mt-2">
+                                <a href="javascript: void(0);" class="link-secondary">Support</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container pb-6 text-secondary">
+                <div class="row justify-content-between">
+                    <div class="col">© Dashly. 2025 Webinning.
+                    </div>
+                    <div class="col-auto">v1.6.0
+                    </div>
+                </div>
+                <!-- / .row -->
+            </div>
+        </footer>
+    </main>
+    <!-- / main -->
+    <!-- JAVASCRIPT-->
+    <!-- Theme JS -->
+    <script src="./assets/js/theme.bundle.js"></script>
+</body>
+
+</html>
